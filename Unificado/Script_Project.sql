@@ -555,6 +555,60 @@ alter table HPTL_MATENIMIENTO
       on update restrict
       on delete restrict;
 
+alter table HPTL_PAQUETES
+   add constraint FK_HPTL_PAQ_REFERENCE_HPTL_RIE foreign key (IDCONSERVACION)
+      references HPTL_RIESGOS (IDRIESGOS)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_PAQUETES
+   add constraint FK_HPTL_PAQ_REFERENCE_HPTL_ALM foreign key (IDALMACENAMIENTO)
+      references HPTL_ALMACENAMIENTO (IDALMACENAMIENTO)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_PAQUETES
+   add constraint FK_HPTL_PAQ_REFERENCE_HPTL_TRA foreign key (IDTRANSPORTE)
+      references HPTL_TRANSPORTE (IDTRANSPORTE)
+      on update restrict
+      on delete restrict;
+	  
+alter table HPTL_RECURSOXAREA
+   add constraint FK_HPTL_REC_REFERENCE_HPTL_UTE foreign key (IDRECURSO)
+      references HPTL_UTENCILIOS (IDRECURSO)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_RECURSOXAREA
+   add constraint FK_HPTL_REC_REFERENCE_HPTL_ARE foreign key (ID)
+      references HPTL.HPTL_AREAS (ID)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_RIESGOS
+   add constraint FK_HPTL_RIE_REFERENCE_HPTL_TIP foreign key (IDTIPORIESGOS)
+      references HPTL_TIPORIESGOS (IDTIPORIESGOS)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_TRANSPORTE
+   add constraint FK_HPTL_TRA_REFERENCE_HPTL_TIP foreign key (IDTIPOTRANSPORTE)
+      references HPTL_TIPOTRANSPORTE (IDTIPOTRANSPORTE)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_UTENCILIOSXPAQUETE
+   add constraint FK_HPTL_UTE_REFERENCE_HPTL_PAQ foreign key (IDPAQUETE)
+      references HPTL_PAQUETES (IDPAQUETE)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_UTENCILIOSXPAQUETE
+   add constraint FK_HPTL_UTE_REFERENCE_HPTL_UTE foreign key (IDRECURSO)
+      references HPTL_UTENCILIOS (IDRECURSO)
+      on update restrict
+      on delete restrict;
+	  
 -- SECUENCIAS PARA IDs (TABLAS GENERALES)
 
 CREATE SEQUENCE HOSPITAL.HPTL_PERSONAS_SEQ 
