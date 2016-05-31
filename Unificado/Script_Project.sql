@@ -334,7 +334,7 @@ CREATE TABLE HOSPITAL.HPTL_HIS_EXAMENES (
 );
 
 CREATE TABLE HOSPITAL.HPTL_RECETA_MEDICAMENTO (
-		RECETA_ID INTEGER NOT NULL,
+		ID INTEGER NOT NULL,
 		RECETA_ID INTEGER NOT NULL,
 		MEDICAMENTO_ID INTEGER NOT NULL,
 		CANTIDAD INTEGER,
@@ -409,6 +409,78 @@ CREATE TABLE HOSPITAL.HPTL_MATENIMIENTO (
 		CONSTRAINT PK_HPTL_MATENIMIENTO PRIMARY KEY (IDMANTENIMIENTO)
 );
 
+CREATE TABLE HOSPITAL.HPTL_PAQUETES 
+(
+   IDPAQUETE            INT                            not null,
+   IDCONSERVACION       INT                            null,
+   IDALMACENAMIENTO     INT                            null,
+   IDTRANSPORTE         INT                            null,
+   CONSTRAINT PK_HPTL_PAQUETES primary key (IDPAQUETE)
+);
+
+CREATE TABLE HPTL_RECURSOXAREA 
+(
+   IDRECURSO            INT                            null,
+   ID                   INTEGER                        null,
+   IDAREA               INT                            null
+);
+
+CREATE TABLE HPTL_RIESGOS 
+(
+   IDRIESGOS            INT                            not null,
+   IDTIPORIESGOS        INT                            null,
+   CONSTRAINT PK_HPTL_RIESGOS PRIMARY KEY (IDRIESGOS)
+);
+
+CREATE TABLE HPTL_TIPOALMACENAMIENTO 
+(
+   IDTIPOALMACENAMIENTO INT                            not null,
+   DESCRIPCION          VARCHAR2(50)                   null,
+   CONSTRAINT PK_HPTL_TIPOALMACENAMIENTO PRIMARY KEY (IDTIPOALMACENAMIENTO)
+);
+
+CREATE TABLE HPTL_TIPOLIMPIEZA 
+(
+   IDTIPOLIMPIEZA       INT                            not null,
+   DESCRIPCION          VARCHAR2(50)                   null,
+   CONSTRAINT PK_HPTL_TIPOLIMPIEZA PRIMARY KEY (IDTIPOLIMPIEZA)
+);
+
+CREATE TABLE HPTL_TIPORIESGOS 
+(
+   IDTIPORIESGOS        INT                            not null,
+   DESCRIPCION          VARCHAR2(50)                   null,
+   CONSTRAINT PK_HPTL_TIPORIESGOS PRIMARY KEY (IDTIPORIESGOS)
+);
+
+create table HPTL_TIPOTRANSPORTE 
+(
+   IDTIPOTRANSPORTE     INT                            not null,
+   DESCRIPCION          VARCHAR2(50)                   null,
+   constraint PK_HPTL_TIPOTRANSPORTE primary key (IDTIPOTRANSPORTE)
+);
+
+create table HPTL_TRANSPORTE 
+(
+   IDTRANSPORTE         INT                            not null,
+   IDTIPOTRANSPORTE     INT                            null,
+   constraint PK_HPTL_TRANSPORTE primary key (IDTRANSPORTE)
+);
+
+create table HPTL_UTENCILIOS 
+(
+   IDRECURSO            INT                            not null,
+   TIPOMATERIAL         VARCHAR2(50)                   null,
+   constraint PK_HPTL_UTENCILIOS primary key (IDRECURSO)
+);
+
+create table HPTL_UTENCILIOSXPAQUETE 
+(
+   IDUTENCILIOSXPAQUETE INT                            not null,
+   IDPAQUETE            INT                            null,
+   IDRECURSO            INT                            null,
+   constraint PK_HPTL_UTENCILIOSXPAQUETE primary key (IDUTENCILIOSXPAQUETE)
+);
 
 -- SECUENCIAS PARA IDs (TABLAS GENERALES)
 
