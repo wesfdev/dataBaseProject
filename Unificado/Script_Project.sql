@@ -482,6 +482,79 @@ create table HPTL_UTENCILIOSXPAQUETE
    constraint PK_HPTL_UTENCILIOSXPAQUETE primary key (IDUTENCILIOSXPAQUETE)
 );
 
+
+alter table HPTL_ALMACENAMIENTO
+   add constraint FK_HPTL_ALM_REFERENCE_HPTL_TIP foreign key (IDTIPOALMACENAMIENTO)
+      references HPTL_TIPOALMACENAMIENTO (IDTIPOALMACENAMIENTO)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_CONTROLESPORRECURSOS
+   add constraint FK_HPTL_CON_REFERENCE_HPTL_CON foreign key (IDCONTROL)
+      references HPTL_CONTROLES (IDCONTROL)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_CONTROLESPORRECURSOS
+   add constraint FK_HPTL_CON_REFERENCE_HPTL_UTE foreign key (IDRECURSO)
+      references HPTL_UTENCILIOS (IDRECURSO)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_CONTROLESPORRECURSOS
+   add constraint FK_HPTL_CON_REFERENCE_HPTL_ENT foreign key (IDENTREGA)
+      references HPTL_ENTREGA (IDENTREGA)
+      on update restrict
+      on delete restrict;	  
+	  
+alter table HPTL_ENTREGA
+   add constraint FK_HPTL_ENT_REFERENCE_HPTL_PAQ foreign key (IDPAQUETE)
+      references HPTL_PAQUETES (IDPAQUETE)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_ENVASEXPAQUETE
+   add constraint FK_HPTL_ENV_REFERENCE_HPTL_ENV foreign key (IDENVASE)
+      references HPTL_ENVASES (IDENVASE)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_ENVASEXPAQUETE
+   add constraint FK_HPTL_ENV_REFERENCE_HPTL_PAQ foreign key (IDPAQUETE)
+      references HPTL_PAQUETES (IDPAQUETE)
+      on update restrict
+      on delete restrict;
+	  
+alter table HPTL_LIMPIEZA
+   add constraint FK_HPTL_LIM_REFERENCE_HPTL_ARE foreign key (ID)
+      references HPTL.HPTL_AREAS (ID)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_LIMPIEZA
+   add constraint FK_HPTL_LIM_REFERENCE_HPTL_TIP foreign key (IDTIPOLIMPIEZA)
+      references HPTL_TIPOLIMPIEZA (IDTIPOLIMPIEZA)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_LIMPIEZA
+   add constraint FK_HPTL_LIM_REFERENCE_HPTL_PUE foreign key (HPT_ID)
+      references HPTL.HPTL_PUESTOS_AREAS (ID)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_MATENIMIENTO
+   add constraint FK_HPTL_MAT_REFERENCE_HPTL_UTE foreign key (IDRECURSO)
+      references HPTL_UTENCILIOS (IDRECURSO)
+      on update restrict
+      on delete restrict;
+
+alter table HPTL_MATENIMIENTO
+   add constraint FK_HPTL_MAT_REFERENCE_HPTL_PUE foreign key (ID)
+      references HPTL.HPTL_PUESTOS_AREAS (ID)
+      on update restrict
+      on delete restrict;
+
 -- SECUENCIAS PARA IDs (TABLAS GENERALES)
 
 CREATE SEQUENCE HOSPITAL.HPTL_PERSONAS_SEQ 
@@ -631,7 +704,7 @@ INCREMENT BY 1
 START WITH 1
 NOMAXVALUE
 
-CREATE SEQUENCE HOSPITAL.HPTL_MEDICA_DETA_SEQ 
+CREATE SEQUENCE HOSPITAL.HPTL_HIS_MEDICA_DETA_SEQ 
 INCREMENT BY 1
 START WITH 1
 NOMAXVALUE
