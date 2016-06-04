@@ -1,13 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      ORACLE Version 11g                           */
 /* Created on:     9/04/2016 12:57:54 a. m.                     */
-/* modificado      03/06/2016                                   */
 /*==============================================================*/
 
 /*==============================================================*/
 /* TABLE: LABORATORIOS_TIPO                                     */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_TIPO; 
+
 CREATE TABLE HOSPITAL.LABORATORIOS_TIPO 
 (
    IDLABOTIPO INT PRIMARY KEY,
@@ -21,15 +20,14 @@ UNIQUE (DSLABOTIPO);
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_TIPO                                 */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABOTIPO;
 CREATE SEQUENCE HOSPITAL.LABOTIPO
-START WITH 1 /*PARAMETRO DE INICIO*/
-INCREMENT BY 1; /*SECUENCIA DE INCREMENTO*/
+START WITH 1 
+INCREMENT BY 1;
 
 /*==============================================================*/
 /* TABLE: LABORATORIOS_RESULTADO                                */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_RESULTADO;
+
 CREATE TABLE HOSPITAL.LABORATORIOS_RESULTADO
 (
   IDLABORESUL INT PRIMARY KEY,
@@ -42,7 +40,7 @@ UNIQUE (DSLABORESUL);
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_RESULTADO                            */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABORESUL;
+
 CREATE SEQUENCE HOSPITAL.LABORESUL
 START WITH 1
 INCREMENT BY 1;
@@ -50,7 +48,7 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_REQUISITO                                */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_REQUISITO;
+
 CREATE TABLE HOSPITAL.LABORATORIOS_REQUISITO
 (
    IDLABOREQUI INT PRIMARY KEY,
@@ -71,7 +69,6 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_CABE                                     */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_CABE;
 CREATE TABLE HOSPITAL.LABORATORIOS_CABE
 (
    IDLABOCABE INT PRIMARY KEY,
@@ -90,7 +87,6 @@ UNIQUE (DSLABOCABE);
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_CABE                                 */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABOCABE;
 CREATE SEQUENCE HOSPITAL.LABOCABE
 START WITH 1
 INCREMENT BY 1 ; 
@@ -122,7 +118,6 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_DETA                                     */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_DETA;
 CREATE TABLE HOSPITAL.LABORATORIOS_DETA
 (
    IDLABODETA INT PRIMARY KEY,
@@ -140,7 +135,6 @@ UNIQUE (IDLABOCABE,IDLABOREQUI);
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_DETA                                 */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABODETA;
 CREATE SEQUENCE HOSPITAL.LABODETA
 START WITH 1
 INCREMENT BY 1;
@@ -148,26 +142,21 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_ORDEN                                     */
 /*==============================================================*/
-
---DROP TABLE HOSPITAL.LABORATORIOS_ORDEN;
 CREATE TABLE HOSPITAL.LABORATORIOS_ORDEN
 (
-  IDLABOORDEN INT PRIMARY KEY,   
+  IDLABOORDEN INT PRIMARY KEY,  
   IDPACIENTE INT NOT NULL,
   FECHAORDEN DATE NOT NULL,
   ESTADO NUMBER(1) NOT NULL,
   CHECK (ESTADO BETWEEN 0 AND 1),
-  CONSTRAINT FK_ORDEN_LAB_REF_HPTL_PAC FOREIGN KEY (IDPACIENTE)
-  REFERENCES HOSPITAL.HPTL_PACIENTES(IDPACIENTE),
-  CONSTRAINT UQ_LAB_ORD__ID_ORD_PAC UNIQUE (IDLABOORDEN,IDPACIENTE)  
+  CONSTRAINT FK_LAB_ORD_REF_LAB_ORD_PAC FOREIGN KEY(IDPACIENTE)
+  REFERENCES HOSPITAL.HPTL_PACIENTES(ID),
+  CONSTRAINT UQ_LAB_ORD_ID_ORD_PAC UNIQUE (IDLABOORDEN,IDPACIENTE)
 );
-SELECT * FROM HOSPITAL.LABORATORIOS_ORDEN; 
-INSERT INTO HOSPITAL.LABORATORIOS_ORDEN(IDLABOORDEN,IDPACIENTE,FECHAORDEN,ESTADO)
-VALUES(HOSPITAL.ORDENLABO.NEXTVAL,1,TO_DATE(SYSDATE,'DD/MM/YYYY'),1);
+
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_ORDEN                                */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.ORDENLABO;
 CREATE SEQUENCE HOSPITAL.ORDENLABO
 START WITH 1
 INCREMENT BY 1;
@@ -175,7 +164,6 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_RESUL_DETA                               */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_RESULTADO_DETA;
 CREATE TABLE HOSPITAL.LABORATORIOS_RESULTADO_DETA
 (
   IDLABORESULDETA INT PRIMARY KEY,
@@ -193,7 +181,6 @@ UNIQUE (IDLABOCABE,IDLABORESUL);
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_RESUL_DETA                           */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABORESULDETA;
 CREATE SEQUENCE HOSPITAL.LABORESULDETA
 START WITH 1
 INCREMENT BY 1;
@@ -201,7 +188,6 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIO_RESULTADO_CABE                            */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_RESULTADO_CABE ;
 CREATE TABLE HOSPITAL.LABORATORIOS_RESULTADO_CABE 
 (
    IDLABORESULCABE INT PRIMARY KEY,
@@ -217,7 +203,7 @@ CREATE TABLE HOSPITAL.LABORATORIOS_RESULTADO_CABE
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_RESULTADO_CABE                       */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.LABORESULTADOCABE;
+
 CREATE SEQUENCE HOSPITAL.LABORESULTADOCABE
 START WITH 1
 INCREMENT BY 1;
@@ -247,7 +233,6 @@ INCREMENT BY 1;
 /*==============================================================*/
 /* TABLE: LABORATORIOS_ORDEN_DETALLE                                     */
 /*==============================================================*/
---DROP TABLE HOSPITAL.LABORATORIOS_ORDEN_DETA;
 CREATE TABLE HOSPITAL.LABORATORIOS_ORDEN_DETA
 (
   IDLABOORDENDETA INT PRIMARY KEY,  
@@ -257,16 +242,12 @@ CREATE TABLE HOSPITAL.LABORATORIOS_ORDEN_DETA
   REFERENCES HOSPITAL.LABORATORIOS_ORDEN (IDLABOORDEN),
   CONSTRAINT FK_LAB_ORD_DET_REF_LAB_CAB FOREIGN KEY(IDLABOCABE)
   REFERENCES HOSPITAL.LABORATORIOS_CABE (IDLABOCABE),
-  CONSTRAINT UQ_LAB_ORD_DETA__IDLAB_ORD_CAB UNIQUE (IDLABOORDEN,IDLABOCABE)
+  CONSTRAINT UQ_LAB_ORD_DETA_IDLAB_ORD_CAB UNIQUE (IDLABOORDEN,IDLABOCABE)
 );
 
 /*==============================================================*/
 /* SECUENCIA: LABORATORIOS_ORDEN_DETA                           */
 /*==============================================================*/
---DROP SEQUENCE HOSPITAL.ORDENLABODETA;
 CREATE SEQUENCE HOSPITAL.ORDENLABODETA
 START WITH 1
 INCREMENT BY 1;
-
-insert into HOSPITAL.LABORATORIOS_ORDEN_DETA(IDLABOORDENDETA,IDLABOORDEN,IDLABOCABE)
-VALUES(HOSPITAL.ORDENLABODETA.NEXTVAL,1,1);
